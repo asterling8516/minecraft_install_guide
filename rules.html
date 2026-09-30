@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homestead - Rules & Info</title>
+    <meta name="description" content="Server rules and backup schedule for Homestead.">
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .rules-list {
+            margin-top: 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+        .rules-list ol {
+            padding-left: 1.5rem;
+            margin-bottom: 0;
+        }
+        .rules-list li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        .rules-list li:last-child {
+            margin-bottom: 0;
+        }
+        .schedule-box {
+            margin-top: 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Server Rules & Info</h1>
+            <div style="margin-top: 1rem; margin-bottom: 2rem; display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+                <a href="index.html" style="color: #5865F2; text-decoration: none; font-weight: 600;">⬅️ Back to Installation Guide</a>
+                <a href="mod-list.html" style="color: #5865F2; text-decoration: none; font-weight: 600;">📋 View Mod List</a>
+            </div>
+            <p>Please read through the rules and take note of our backup schedule.</p>
+        </header>
+
+        <main>
+            <section class="rules-list">
+                <h2>The Rules</h2>
+                <ol>
+                    <li><strong>No griefing:</strong> Any pranks should take less than 5 minutes to clean up.</li>
+                    <li><strong>Invites:</strong> Anyone is welcome on the server, just make sure you whitelist them. I'd prefer they are in the Discord so they get the messages when mods are added, but if you're willing to be the in-between, then that's fine.</li>
+                    <li><strong>Be respectful:</strong> Just be adults, I believe in you!</li>
+                    <li><strong>Have fun:</strong> And kill the Endermen!</li>
+                </ol>
+            </section>
+
+            <section class="schedule-box">
+                <h2>Backup Schedule</h2>
+                <p>The server runs regular backups to keep our progress safe. The times below have been automatically converted to your local timezone.</p>
+                <ul style="margin-top: 1rem; line-height: 1.6;">
+                    <li><strong>Lite Backups:</strong> Every 6 hours starting at <span id="lite-time" style="font-weight: 600; color: #5865F2;">Midnight (Chicago Time)</span></li>
+                    <li><strong>Full Backup & Restart:</strong> Daily at <span id="full-time" style="font-weight: 600; color: #5865F2;">1:00 AM (Chicago Time)</span></li>
+                </ul>
+            </section>
+        </main>
+        
+        <footer>
+            <p>See you on the server! 🚀</p>
+        </footer>
+    </div>
+
+    <script>
+        function formatChicagoTime(hour) {
+            try {
+                // Get the current offset for America/Chicago
+                const chicagoTimeStr = new Date().toLocaleString("en-US", {timeZone: "America/Chicago", timeZoneName: "shortOffset"});
+                const match = chicagoTimeStr.match(/GMT([+-]\d+)/);
+                let offset = "-06:00"; // default to CST
+                if (match) {
+                    let hr = parseInt(match[1]);
+                    offset = (hr < 0 ? "-" : "+") + String(Math.abs(hr)).padStart(2, '0') + ":00";
+                }
+                
+                const today = new Date();
+                const y = today.getFullYear();
+                const m = String(today.getMonth() + 1).padStart(2, '0');
+                const d = String(today.getDate()).padStart(2, '0');
+                
+                const isoString = `${y}-${m}-${d}T${String(hour).padStart(2, '0')}:00:00${offset}`;
+                const dateObj = new Date(isoString);
+                
+                return new Intl.DateTimeFormat('en-US', {
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    timeZoneName: 'short'
+                }).format(dateObj);
+            } catch (e) {
+                console.error("Error formatting time:", e);
+                return null;
+            }
+        }
+
+        const t0 = formatChicagoTime(0);
+        const t6 = formatChicagoTime(6);
+        const t12 = formatChicagoTime(12);
+        const t18 = formatChicagoTime(18);
+        const t1 = formatChicagoTime(1);
+
+        if (t0 && t6 && t12 && t18 && t1) {
+            document.getElementById('lite-time').textContent = `${t0}, ${t6}, ${t12}, and ${t18}`;
+            document.getElementById('full-time').textContent = t1;
+        }
+    </script>
+</body>
+</html>

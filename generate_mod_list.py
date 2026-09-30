@@ -61,8 +61,9 @@ def main():
     <div class="container">
         <header>
             <h1>Server Mod List</h1>
-            <div style="margin-top: 1rem; margin-bottom: 2rem;">
+            <div style="margin-top: 1rem; margin-bottom: 2rem; display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
                 <a href="index.html" style="color: #5865F2; text-decoration: none; font-weight: 600;">⬅️ Back to Installation Guide</a>
+                <a href="rules.html" style="color: #5865F2; text-decoration: none; font-weight: 600;">📜 View Server Rules</a>
             </div>
             <p>Here are all the {len(mods)} mods currently active on the Homestead server.</p>
         </header>
