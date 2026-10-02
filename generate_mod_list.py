@@ -12,7 +12,7 @@ def clean_mod_name(filename):
     return name.title()
 
 def main():
-    mod_folder = r'c:\Users\AstralSterling\Projects\minecraft_install_guide\full_mod_folder'
+    mod_folder = r'c:\Users\AstralSterling\Projects\minecraft_install_guide\mods'
     mods = []
     
     if os.path.exists(mod_folder):
@@ -83,6 +83,7 @@ def main():
         
         <footer>
             <p>See you on the server! 🚀</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.6);">Built and Maintained by <a href="https://astralsterling.com/" style="color: #5865F2; text-decoration: none;">Astral Sterling</a></p>
         </footer>
     </div>
 </body>
