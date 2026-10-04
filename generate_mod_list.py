@@ -55,6 +55,25 @@ def main():
             font-size: 0.85rem;
             color: rgba(255, 255, 255, 0.6);
         }}
+        .search-container {{
+            margin-bottom: 2rem;
+            text-align: center;
+        }}
+        .search-input {{
+            width: 100%;
+            max-width: 500px;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }}
+        .search-input:focus {{
+            border-color: #5865F2;
+        }}
     </style>
 </head>
 <body>
@@ -69,7 +88,10 @@ def main():
         </header>
 
         <main>
-            <div class="mod-list">
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search mods...">
+            </div>
+            <div class="mod-list" id="modList">
 """
     for display_name, original_name in mods:
         html += f"""                <div class="mod-item">
@@ -86,6 +108,21 @@ def main():
             <p style="margin-top: 1rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.6);">Built and Maintained by <a href="https://astralsterling.com/" style="color: #5865F2; text-decoration: none;">Astral Sterling</a></p>
         </footer>
     </div>
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const term = e.target.value.toLowerCase();
+            const items = document.querySelectorAll('.mod-item');
+            
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(term)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>"""
 
