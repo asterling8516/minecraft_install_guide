@@ -12,7 +12,7 @@ def clean_mod_name(filename):
     return name.title()
 
 def main():
-    mod_folder = r'c:\Users\AstralSterling\Projects\minecraft_install_guide\mods'
+    mod_folder = r'c:\Users\AstralSterling\Projects\minecraft_install_guide\Full Mod Folder'
     mods = []
     
     if os.path.exists(mod_folder):
